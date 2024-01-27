@@ -19,10 +19,9 @@ Git (for version control)
 Installation
 Clone the Repository
 
-bash
-Copy code
-git clone https://github.com/yas305/simplemicroservice.git
-cd your-repository
+
+`git clone https://github.com/yas305/simplemicroservice.git`
+`cd your-repository`
 Start RabbitMQ Server
 
 Ensure RabbitMQ is running on your machine. Refer to the RabbitMQ documentation for installation and running instructions.
@@ -33,14 +32,11 @@ Open two terminal windows, one for each microservice.
 
 In the first terminal, navigate to the directory of the first microservice and run:
 
-bash
-Copy code
-go run main.go
+
+`go run main.go`
 In the second terminal, navigate to the directory of the second microservice and run:
 
-bash
-Copy code
-go run secondservice.go
+`go run secondservice.go`
 Open the Client
 
 Open index.html in your web browser to use the client interface.

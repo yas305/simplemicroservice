@@ -21,7 +21,7 @@ Clone the Repository
 
 bash
 Copy code
-git clone https://github.com/your-username/simplemicroservice.git
+git clone https://github.com/yas305/simplemicroservice.git
 cd your-repository
 Start RabbitMQ Server
 

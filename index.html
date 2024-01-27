@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Microservice</title>
+</head>
+<body>
+    
+    <input type="number" id="number1">
+    <input type="number" id="number2">
+    <button id="sendButton">Send to Microservice</button>
+    <h1 id="result">microservice results</h1>
+    <h1 id="doubledResult"></h1>
+
+    <script>
+
+
+
+
+
+
+
+
+
+var socket = new WebSocket('ws://localhost:9090/ws');
+
+socket.onopen = function(e) {
+    console.log("[open] Connection established");
+};
+
+
+
+
+
+
+socket.onmessage = function(event) {
+    console.log("Raw WebSocket data received:", event.data);
+    try {
+        var data = JSON.parse(event.data);
+        document.getElementById("doubledResult").innerHTML = 
+            "Received " + data.originalResult + " from the first microservice, " +
+            "the result from microservice 2 is " + data.doubledResult;
+    } catch (error) {
+        console.error('Error parsing WebSocket data:', error);
+    }
+};;
+
+
+
+document.getElementById('sendButton').addEventListener('click', function() {
+    var num1 = document.getElementById('number1').value;
+    var num2 = document.getElementById('number2').value;
+
+    fetch('http://localhost:8080/calculate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ number1: parseInt(num1), number2: parseInt(num2) })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }) 
+    .then(data => {
+        console.log('Success:', data);
+        document.getElementById("result").innerHTML = 
+            "The result from the first microservice is " + data.resultFromFirstMicroservice + 
+            ", now sending over this to the second microservice.";
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        document.getElementById("result").innerHTML = "Error: " + error;
+    });
+});
+
+
+    </script>
+</body>
+</html>

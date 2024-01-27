@@ -21,7 +21,7 @@ Clone the Repository
 
 bash
 Copy code
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/your-username/simplemicroservice.git
 cd your-repository
 Start RabbitMQ Server
 
@@ -35,7 +35,7 @@ In the first terminal, navigate to the directory of the first microservice and r
 
 bash
 Copy code
-go run firstservice.go
+go run main.go
 In the second terminal, navigate to the directory of the second microservice and run:
 
 bash
